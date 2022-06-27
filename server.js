@@ -1,8 +1,10 @@
 import express from 'express';
 import mysql from 'mysql';
+import dotenv from 'dotenv';
 
 const app = express();
 const port = 3032;
+dotenv.config();
 
 app.get('/', (req, res) => {
     res.send('test api');
@@ -11,8 +13,8 @@ app.get('/', (req, res) => {
 app.get('/customers', (req, res) => {
     const connection = mysql.createConnection({
         host: 'localhost',
-        user: 'webuser',
-        password: 'passpass',
+        user: process.env.USER,
+        password: process.env.PASSWORD,
         database: 'northwind'
     });
     connection.connect((err) => {
